@@ -6,6 +6,9 @@
 (function() {
     'use strict';
 
+    // ===== Configuration Constants =====
+    const EMPLOYER_CHARGES_RATE = 1.4; // 40% employer charges rate
+
     // ===== Employee Data (Mock) =====
     const employees = {
         '1': {
@@ -347,7 +350,7 @@
         const recruitmentCost = parseFloat(recruitmentCostEl.value) || 0;
         
         const currentAnnualCost = currentEmployee.totalCost * 12;
-        const newAnnualCost = (newSalary * 1.4) * 12; // Assuming 40% charges
+        const newAnnualCost = (newSalary * EMPLOYER_CHARGES_RATE) * 12;
         const variance = newAnnualCost - currentAnnualCost + recruitmentCost;
 
         const preview = replaceForm.querySelector('.calculation-preview');

@@ -44,7 +44,9 @@
             
             const mfaCode = document.getElementById('mfaCode').value;
             
-            // Simulate MFA validation (accept any 6-digit code for demo)
+            // DEMO MODE: Accept any 6-digit code for MVP demonstration
+            // In production, this should validate against a real MFA service
+            // WARNING: This is NOT secure and should be replaced with proper authentication
             if (mfaCode && mfaCode.length === 6) {
                 UIkit.notification({
                     message: 'Authentification réussie! Redirection...',

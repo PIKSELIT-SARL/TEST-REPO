@@ -360,7 +360,7 @@ body {
     }
     
     .chart-bar::after {
-        font-size: 8px;
+        font-size: 10px;
     }
     
     .comparison-bars {
@@ -372,7 +372,7 @@ body {
     }
     
     .bar-label {
-        font-size: 8px;
+        font-size: 10px;
     }
 }
 
