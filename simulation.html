@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PILOTINE - Simulation</title>
+    
+    <!-- Franken UI CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/franken-ui@2.1.1/dist/css/core.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/franken-ui@2.1.1/dist/css/utilities.min.css" />
+    
+    <!-- UIkit JS for interactivity -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/js/uikit-icons.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+        <div class="uk-container uk-container-expand">
+            <div class="uk-navbar-left">
+                <a href="dashboard.html" class="uk-navbar-item uk-logo">
+                    <span uk-icon="icon: settings; ratio: 1.2" class="uk-text-primary uk-margin-small-right"></span>
+                    <span class="uk-text-primary uk-text-bold">PILOTINE</span>
+                </a>
+            </div>
+            <div class="uk-navbar-center">
+                <ul class="uk-navbar-nav">
+                    <li><a href="dashboard.html">Tableau de Bord</a></li>
+                    <li class="uk-active"><a href="simulation.html">Simulation</a></li>
+                    <li><a href="projections.html">Projections</a></li>
+                </ul>
+            </div>
+            <div class="uk-navbar-right">
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <a href="#">
+                            <span uk-icon="icon: user"></span>
+                            <span class="uk-visible@m">Admin</span>
+                        </a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li><a href="#">Mon Profil</a></li>
+                                <li><a href="#">Paramètres</a></li>
+                                <li class="uk-nav-divider"></li>
+                                <li><a href="index.html">Déconnexion</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="uk-section uk-section-small">
+        <div class="uk-container">
+            <!-- Header -->
+            <div class="uk-margin-medium-bottom">
+                <div class="uk-flex uk-flex-between uk-flex-middle uk-flex-wrap">
+                    <div>
+                        <h1 class="uk-heading-small uk-margin-remove">Module de Simulation</h1>
+                        <p class="uk-text-muted">Modélisez les impacts financiers de vos décisions RH</p>
+                    </div>
+                    <div>
+                        <a href="dashboard.html" class="uk-button uk-button-default uk-margin-small-right">
+                            <span uk-icon="icon: arrow-left; ratio: 0.8"></span>
+                            Retour
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Simulation Form -->
+            <div class="uk-grid-medium" uk-grid>
+                <!-- Left Panel: Employee Selection & Actions -->
+                <div class="uk-width-1-3@m">
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title">Sélection du Collaborateur</h3>
+                        
+                        <form id="employeeSelectForm" class="uk-form-stacked">
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="employeeSelect">Collaborateur</label>
+                                <select class="uk-select" id="employeeSelect">
+                                    <option value="">-- Sélectionner --</option>
+                                    <option value="1" selected>Marie Dupont - Production</option>
+                                    <option value="2">Jean Martin - Commercial</option>
+                                    <option value="3">Sophie Leroy - Administration</option>
+                                    <option value="4">Pierre Bernard - R&D</option>
+                                    <option value="new">+ Nouveau Collaborateur</option>
+                                </select>
+                            </div>
+                        </form>
+                        
+                        <!-- Selected Employee Info -->
+                        <div id="employeeInfo" class="uk-card uk-card-secondary uk-card-body uk-card-small uk-margin-top">
+                            <div class="uk-flex uk-flex-middle uk-margin-bottom">
+                                <div class="uk-border-circle uk-background-primary uk-flex uk-flex-center uk-flex-middle" 
+                                     style="width: 50px; height: 50px;">
+                                    <span class="uk-text-bold" style="color: white;">MD</span>
+                                </div>
+                                <div class="uk-margin-small-left">
+                                    <p class="uk-margin-remove uk-text-bold">Marie Dupont</p>
+                                    <p class="uk-margin-remove uk-text-small uk-text-muted">Production</p>
+                                </div>
+                            </div>
+                            <ul class="uk-list uk-list-divider uk-margin-remove">
+                                <li class="uk-flex uk-flex-between">
+                                    <span class="uk-text-muted">Contrat</span>
+                                    <span>CDI</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between">
+                                    <span class="uk-text-muted">ETP Actuel</span>
+                                    <span>1.0</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between">
+                                    <span class="uk-text-muted">Salaire Brut</span>
+                                    <span>3 200 €</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between">
+                                    <span class="uk-text-muted">Coût Total</span>
+                                    <span class="uk-text-bold">4 480 €</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Type Selection -->
+                    <div class="uk-card uk-card-default uk-card-body uk-margin-top">
+                        <h3 class="uk-card-title">Type d'Action</h3>
+                        
+                        <div class="uk-margin">
+                            <div class="uk-form-controls">
+                                <label class="action-radio">
+                                    <input class="uk-radio" type="radio" name="actionType" value="salary" checked>
+                                    <span class="action-radio-content">
+                                        <span uk-icon="icon: credit-card; ratio: 1.2"></span>
+                                        <span class="uk-margin-small-left">Ajustement Salarial</span>
+                                    </span>
+                                </label>
+                                <label class="action-radio">
+                                    <input class="uk-radio" type="radio" name="actionType" value="exit">
+                                    <span class="action-radio-content">
+                                        <span uk-icon="icon: sign-out; ratio: 1.2"></span>
+                                        <span class="uk-margin-small-left">Départ</span>
+                                    </span>
+                                </label>
+                                <label class="action-radio">
+                                    <input class="uk-radio" type="radio" name="actionType" value="replace">
+                                    <span class="action-radio-content">
+                                        <span uk-icon="icon: refresh; ratio: 1.2"></span>
+                                        <span class="uk-margin-small-left">Remplacement</span>
+                                    </span>
+                                </label>
+                                <label class="action-radio">
+                                    <input class="uk-radio" type="radio" name="actionType" value="etp">
+                                    <span class="action-radio-content">
+                                        <span uk-icon="icon: clock; ratio: 1.2"></span>
+                                        <span class="uk-margin-small-left">Modification ETP</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Panel: Action Details & Results -->
+                <div class="uk-width-2-3@m">
+                    <!-- Salary Adjustment Form -->
+                    <div id="salaryForm" class="uk-card uk-card-default uk-card-body simulation-form">
+                        <h3 class="uk-card-title">Ajustement Salarial</h3>
+                        <p class="uk-text-muted">Simulez l'impact d'une augmentation ou d'une prime</p>
+                        
+                        <form class="uk-form-stacked uk-grid-small" uk-grid>
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label" for="adjustmentType">Type d'ajustement</label>
+                                <select class="uk-select" id="adjustmentType">
+                                    <option value="raise">Augmentation de salaire</option>
+                                    <option value="bonus">Prime exceptionnelle</option>
+                                    <option value="promotion">Promotion</option>
+                                </select>
+                            </div>
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label" for="effectiveDate">Date d'effet</label>
+                                <input class="uk-input" id="effectiveDate" type="date" value="2024-01-01">
+                            </div>
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label" for="adjustmentMethod">Méthode</label>
+                                <select class="uk-select" id="adjustmentMethod">
+                                    <option value="percent">Pourcentage</option>
+                                    <option value="amount">Montant fixe</option>
+                                </select>
+                            </div>
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label" for="adjustmentValue">Valeur</label>
+                                <div class="uk-flex">
+                                    <input class="uk-input" id="adjustmentValue" type="number" value="5" min="0" step="0.1">
+                                    <span class="uk-form-icon uk-form-icon-flip" id="adjustmentUnit">%</span>
+                                </div>
+                            </div>
+                        </form>
+                        
+                        <hr class="uk-divider-small">
+                        
+                        <!-- Calculation Preview -->
+                        <div class="calculation-preview">
+                            <h4 class="uk-margin-small-bottom">Aperçu du calcul</h4>
+                            <div class="uk-grid-small uk-child-width-1-3@s" uk-grid>
+                                <div>
+                                    <div class="uk-text-small uk-text-muted">Salaire Actuel</div>
+                                    <div class="uk-text-lead">3 200 €</div>
+                                </div>
+                                <div>
+                                    <div class="uk-text-small uk-text-muted">Ajustement</div>
+                                    <div class="uk-text-lead uk-text-success">+160 €</div>
+                                </div>
+                                <div>
+                                    <div class="uk-text-small uk-text-muted">Nouveau Salaire</div>
+                                    <div class="uk-text-lead uk-text-primary">3 360 €</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Exit Form (hidden by default) -->
+                    <div id="exitForm" class="uk-card uk-card-default uk-card-body simulation-form uk-hidden">
+                        <h3 class="uk-card-title">Simulation de Départ</h3>
+                        <p class="uk-text-muted">Modélisez l'impact financier d'un départ</p>
+                        
+                        <form class="uk-form-stacked uk-grid-small" uk-grid>
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label" for="exitType">Type de départ</label>
+                                <select class="uk-select" id="exitType">
+                                    <option value="resignation">Démission</option>
+                                    <option value="retirement">Retraite</option>
+                                    <option value="dismissal">Licenciement</option>
+                                    <option value="rupture">Rupture conventionnelle</option>
+                                </select>
+                            </div>
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label" for="exitDate">Date de départ</label>
+                                <input class="uk-input" id="exitDate" type="date" value="2024-03-31">
+                            </div>
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label" for="noticePeriod">Préavis (mois)</label>
+                                <input class="uk-input" id="noticePeriod" type="number" value="3" min="0">
+                            </div>
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label" for="severancePay">Indemnités de départ</label>
+                                <input class="uk-input" id="severancePay" type="number" value="9600" min="0">
+                            </div>
+                        </form>
+                        
+                        <hr class="uk-divider-small">
+                        
+                        <div class="calculation-preview">
+                            <h4 class="uk-margin-small-bottom">Impact Financier</h4>
+                            <div class="uk-grid-small uk-child-width-1-3@s" uk-grid>
+                                <div>
+                                    <div class="uk-text-small uk-text-muted">Coût Préavis</div>
+                                    <div class="uk-text-lead">13 440 €</div>
+                                </div>
+                                <div>
+                                    <div class="uk-text-small uk-text-muted">Indemnités</div>
+                                    <div class="uk-text-lead">9 600 €</div>
+                                </div>
+                                <div>
+                                    <div class="uk-text-small uk-text-muted">Économie Annuelle</div>
+                                    <div class="uk-text-lead uk-text-success">-53 760 €</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Replace Form (hidden by default) -->
+                    <div id="replaceForm" class="uk-card uk-card-default uk-card-body simulation-form uk-hidden">
+                        <h3 class="uk-card-title">Simulation de Remplacement</h3>
+                        <p class="uk-text-muted">Comparez le coût d'un remplacement</p>
+                        
+                        <form class="uk-form-stacked uk-grid-small" uk-grid>
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label" for="newSalary">Salaire du remplaçant</label>
+                                <input class="uk-input" id="newSalary" type="number" value="2800" min="0">
+                            </div>
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label" for="startDate">Date d'arrivée</label>
+                                <input class="uk-input" id="startDate" type="date" value="2024-04-01">
+                            </div>
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label" for="newContractType">Type de contrat</label>
+                                <select class="uk-select" id="newContractType">
+                                    <option value="cdi">CDI</option>
+                                    <option value="cdd">CDD</option>
+                                    <option value="interim">Intérim</option>
+                                </select>
+                            </div>
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label" for="recruitmentCost">Coût de recrutement</label>
+                                <input class="uk-input" id="recruitmentCost" type="number" value="5000" min="0">
+                            </div>
+                        </form>
+                        
+                        <hr class="uk-divider-small">
+                        
+                        <div class="calculation-preview">
+                            <h4 class="uk-margin-small-bottom">Comparaison des Coûts</h4>
+                            <div class="uk-grid-small uk-child-width-1-3@s" uk-grid>
+                                <div>
+                                    <div class="uk-text-small uk-text-muted">Coût Sortant</div>
+                                    <div class="uk-text-lead">53 760 €/an</div>
+                                </div>
+                                <div>
+                                    <div class="uk-text-small uk-text-muted">Coût Entrant</div>
+                                    <div class="uk-text-lead">47 040 €/an</div>
+                                </div>
+                                <div>
+                                    <div class="uk-text-small uk-text-muted">Variance</div>
+                                    <div class="uk-text-lead uk-text-success">-6 720 €</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ETP Form (hidden by default) -->
+                    <div id="etpForm" class="uk-card uk-card-default uk-card-body simulation-form uk-hidden">
+                        <h3 class="uk-card-title">Modification ETP</h3>
+                        <p class="uk-text-muted">Simulez un changement de temps de travail</p>
+                        
+                        <form class="uk-form-stacked uk-grid-small" uk-grid>
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label" for="currentEtp">ETP Actuel</label>
+                                <input class="uk-input" id="currentEtp" type="number" value="1.0" min="0" max="1" step="0.1" readonly>
+                            </div>
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label" for="newEtp">Nouvel ETP</label>
+                                <input class="uk-input" id="newEtp" type="number" value="0.8" min="0" max="1" step="0.1">
+                            </div>
+                            <div class="uk-width-1-1">
+                                <label class="uk-form-label">Échelle ETP</label>
+                                <input class="uk-range" type="range" id="etpRange" min="0" max="1" step="0.1" value="0.8">
+                                <div class="uk-flex uk-flex-between uk-text-small uk-text-muted uk-margin-small-top">
+                                    <span>0%</span>
+                                    <span>20%</span>
+                                    <span>40%</span>
+                                    <span>60%</span>
+                                    <span>80%</span>
+                                    <span>100%</span>
+                                </div>
+                            </div>
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label" for="etpEffectiveDate">Date d'effet</label>
+                                <input class="uk-input" id="etpEffectiveDate" type="date" value="2024-01-01">
+                            </div>
+                        </form>
+                        
+                        <hr class="uk-divider-small">
+                        
+                        <div class="calculation-preview">
+                            <h4 class="uk-margin-small-bottom">Impact sur le Coût</h4>
+                            <div class="uk-grid-small uk-child-width-1-3@s" uk-grid>
+                                <div>
+                                    <div class="uk-text-small uk-text-muted">Coût Actuel</div>
+                                    <div class="uk-text-lead">4 480 €/mois</div>
+                                </div>
+                                <div>
+                                    <div class="uk-text-small uk-text-muted">Nouveau Coût</div>
+                                    <div class="uk-text-lead">3 584 €/mois</div>
+                                </div>
+                                <div>
+                                    <div class="uk-text-small uk-text-muted">Économie Annuelle</div>
+                                    <div class="uk-text-lead uk-text-success">-10 752 €</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="uk-flex uk-flex-right uk-margin-top">
+                        <button class="uk-button uk-button-default uk-margin-small-right" id="resetBtn">
+                            <span uk-icon="icon: refresh; ratio: 0.8"></span>
+                            Réinitialiser
+                        </button>
+                        <button class="uk-button uk-button-default uk-margin-small-right" id="addToScenarioBtn">
+                            <span uk-icon="icon: plus; ratio: 0.8"></span>
+                            Ajouter au Scénario
+                        </button>
+                        <a href="projections.html" class="uk-button uk-button-primary" id="viewProjectionsBtn">
+                            <span uk-icon="icon: arrow-right; ratio: 0.8"></span>
+                            Voir les Projections
+                        </a>
+                    </div>
+                    
+                    <!-- Current Scenario Summary -->
+                    <div class="uk-card uk-card-default uk-card-body uk-margin-top">
+                        <div class="uk-flex uk-flex-between uk-flex-middle">
+                            <h3 class="uk-card-title uk-margin-remove">Scénario en cours</h3>
+                            <span class="uk-badge">3 actions</span>
+                        </div>
+                        
+                        <table class="uk-table uk-table-small uk-table-divider uk-margin-small-top">
+                            <thead>
+                                <tr>
+                                    <th>Collaborateur</th>
+                                    <th>Action</th>
+                                    <th class="uk-text-right">Impact</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Marie Dupont</td>
+                                    <td>Augmentation +5%</td>
+                                    <td class="uk-text-right uk-text-danger">+1 920 €/an</td>
+                                    <td><a href="#" uk-icon="icon: trash; ratio: 0.8" class="uk-text-danger"></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Jean Martin</td>
+                                    <td>Départ (retraite)</td>
+                                    <td class="uk-text-right uk-text-success">-75 600 €/an</td>
+                                    <td><a href="#" uk-icon="icon: trash; ratio: 0.8" class="uk-text-danger"></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Nouveau</td>
+                                    <td>Recrutement CDI</td>
+                                    <td class="uk-text-right uk-text-danger">+42 000 €/an</td>
+                                    <td><a href="#" uk-icon="icon: trash; ratio: 0.8" class="uk-text-danger"></a></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2" class="uk-text-bold">Impact Total du Scénario</td>
+                                    <td class="uk-text-right uk-text-success uk-text-bold">-31 680 €/an</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="uk-section uk-section-small uk-section-muted">
+        <div class="uk-container">
+            <div class="uk-flex uk-flex-between uk-flex-middle uk-flex-wrap">
+                <p class="uk-text-small uk-text-muted uk-margin-remove">
+                    © 2024 PILOTINE - Pilotage de la Masse Salariale
+                </p>
+                <p class="uk-text-small uk-text-muted uk-margin-remove">
+                    <span uk-icon="icon: lock; ratio: 0.7"></span>
+                    Connexion sécurisée MY SILAE (lecture seule)
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Custom JS -->
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/simulation.js"></script>
+</body>
+</html>
