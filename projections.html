@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PILOTINE - Projections</title>
+    
+    <!-- Franken UI CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/franken-ui@2.1.1/dist/css/core.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/franken-ui@2.1.1/dist/css/utilities.min.css" />
+    
+    <!-- UIkit JS for interactivity -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/js/uikit-icons.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+        <div class="uk-container uk-container-expand">
+            <div class="uk-navbar-left">
+                <a href="dashboard.html" class="uk-navbar-item uk-logo">
+                    <span uk-icon="icon: settings; ratio: 1.2" class="uk-text-primary uk-margin-small-right"></span>
+                    <span class="uk-text-primary uk-text-bold">PILOTINE</span>
+                </a>
+            </div>
+            <div class="uk-navbar-center">
+                <ul class="uk-navbar-nav">
+                    <li><a href="dashboard.html">Tableau de Bord</a></li>
+                    <li><a href="simulation.html">Simulation</a></li>
+                    <li class="uk-active"><a href="projections.html">Projections</a></li>
+                </ul>
+            </div>
+            <div class="uk-navbar-right">
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <a href="#">
+                            <span uk-icon="icon: user"></span>
+                            <span class="uk-visible@m">Admin</span>
+                        </a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li><a href="#">Mon Profil</a></li>
+                                <li><a href="#">Paramètres</a></li>
+                                <li class="uk-nav-divider"></li>
+                                <li><a href="index.html">Déconnexion</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="uk-section uk-section-small">
+        <div class="uk-container">
+            <!-- Header -->
+            <div class="uk-margin-medium-bottom">
+                <div class="uk-flex uk-flex-between uk-flex-middle uk-flex-wrap">
+                    <div>
+                        <h1 class="uk-heading-small uk-margin-remove">Projections Financières</h1>
+                        <p class="uk-text-muted">Visualisez l'impact de vos décisions sur la masse salariale</p>
+                    </div>
+                    <div class="uk-flex">
+                        <a href="simulation.html" class="uk-button uk-button-default uk-margin-small-right">
+                            <span uk-icon="icon: pencil; ratio: 0.8"></span>
+                            Modifier le Scénario
+                        </a>
+                        <button class="uk-button uk-button-primary" id="exportBtn">
+                            <span uk-icon="icon: download; ratio: 0.8"></span>
+                            Exporter PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Variance Summary Cards -->
+            <div class="uk-grid-small uk-child-width-1-2@s uk-child-width-1-4@m" uk-grid>
+                <div>
+                    <div class="uk-card uk-card-default uk-card-body variance-card">
+                        <div class="uk-flex uk-flex-between uk-flex-top">
+                            <div>
+                                <p class="uk-text-small uk-text-muted uk-margin-remove">Masse Salariale Référence</p>
+                                <h2 class="uk-margin-remove">2 450 000 €</h2>
+                                <p class="uk-text-small uk-text-muted uk-margin-remove">Base annuelle</p>
+                            </div>
+                            <span uk-icon="icon: database; ratio: 1.5" class="uk-text-muted"></span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="uk-card uk-card-default uk-card-body variance-card">
+                        <div class="uk-flex uk-flex-between uk-flex-top">
+                            <div>
+                                <p class="uk-text-small uk-text-muted uk-margin-remove">Masse Salariale Projetée</p>
+                                <h2 class="uk-margin-remove uk-text-primary">2 418 320 €</h2>
+                                <p class="uk-text-small uk-text-success uk-margin-remove">
+                                    <span uk-icon="icon: arrow-down; ratio: 0.7"></span> -1.3%
+                                </p>
+                            </div>
+                            <span uk-icon="icon: future; ratio: 1.5" class="uk-text-primary"></span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="uk-card uk-card-default uk-card-body variance-card variance-positive">
+                        <div class="uk-flex uk-flex-between uk-flex-top">
+                            <div>
+                                <p class="uk-text-small uk-text-muted uk-margin-remove">Variance Totale</p>
+                                <h2 class="uk-margin-remove uk-text-success">-31 680 €</h2>
+                                <p class="uk-text-small uk-text-muted uk-margin-remove">Économie annuelle</p>
+                            </div>
+                            <span uk-icon="icon: trending-down; ratio: 1.5" class="uk-text-success"></span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="uk-card uk-card-default uk-card-body variance-card">
+                        <div class="uk-flex uk-flex-between uk-flex-top">
+                            <div>
+                                <p class="uk-text-small uk-text-muted uk-margin-remove">ETP Projeté</p>
+                                <h2 class="uk-margin-remove">44.5</h2>
+                                <p class="uk-text-small uk-text-warning uk-margin-remove">
+                                    <span uk-icon="icon: arrow-down; ratio: 0.7"></span> -1.0 ETP
+                                </p>
+                            </div>
+                            <span uk-icon="icon: users; ratio: 1.5" class="uk-text-muted"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Comparison Chart -->
+            <div class="uk-grid-small uk-margin-medium-top" uk-grid>
+                <div class="uk-width-2-3@m">
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <div class="uk-card-header uk-padding-remove-top">
+                            <h3 class="uk-card-title">Comparaison Mensuelle : Référence vs Projection</h3>
+                        </div>
+                        
+                        <div class="comparison-chart">
+                            <div class="chart-legend uk-flex uk-flex-center uk-margin-bottom">
+                                <span class="legend-item">
+                                    <span class="legend-color reference"></span>
+                                    Référence
+                                </span>
+                                <span class="legend-item uk-margin-left">
+                                    <span class="legend-color projection"></span>
+                                    Projection
+                                </span>
+                            </div>
+                            
+                            <div class="comparison-bars">
+                                <div class="comparison-bar-group">
+                                    <div class="bar-pair">
+                                        <div class="bar reference" style="height: 60%;"></div>
+                                        <div class="bar projection" style="height: 58%;"></div>
+                                    </div>
+                                    <span class="bar-label">Jan</span>
+                                </div>
+                                <div class="comparison-bar-group">
+                                    <div class="bar-pair">
+                                        <div class="bar reference" style="height: 65%;"></div>
+                                        <div class="bar projection" style="height: 63%;"></div>
+                                    </div>
+                                    <span class="bar-label">Fév</span>
+                                </div>
+                                <div class="comparison-bar-group">
+                                    <div class="bar-pair">
+                                        <div class="bar reference" style="height: 62%;"></div>
+                                        <div class="bar projection" style="height: 60%;"></div>
+                                    </div>
+                                    <span class="bar-label">Mar</span>
+                                </div>
+                                <div class="comparison-bar-group">
+                                    <div class="bar-pair">
+                                        <div class="bar reference" style="height: 70%;"></div>
+                                        <div class="bar projection" style="height: 65%;"></div>
+                                    </div>
+                                    <span class="bar-label">Avr</span>
+                                </div>
+                                <div class="comparison-bar-group">
+                                    <div class="bar-pair">
+                                        <div class="bar reference" style="height: 68%;"></div>
+                                        <div class="bar projection" style="height: 64%;"></div>
+                                    </div>
+                                    <span class="bar-label">Mai</span>
+                                </div>
+                                <div class="comparison-bar-group">
+                                    <div class="bar-pair">
+                                        <div class="bar reference" style="height: 75%;"></div>
+                                        <div class="bar projection" style="height: 70%;"></div>
+                                    </div>
+                                    <span class="bar-label">Juin</span>
+                                </div>
+                                <div class="comparison-bar-group">
+                                    <div class="bar-pair">
+                                        <div class="bar reference" style="height: 72%;"></div>
+                                        <div class="bar projection" style="height: 68%;"></div>
+                                    </div>
+                                    <span class="bar-label">Juil</span>
+                                </div>
+                                <div class="comparison-bar-group">
+                                    <div class="bar-pair">
+                                        <div class="bar reference" style="height: 65%;"></div>
+                                        <div class="bar projection" style="height: 62%;"></div>
+                                    </div>
+                                    <span class="bar-label">Août</span>
+                                </div>
+                                <div class="comparison-bar-group">
+                                    <div class="bar-pair">
+                                        <div class="bar reference" style="height: 78%;"></div>
+                                        <div class="bar projection" style="height: 74%;"></div>
+                                    </div>
+                                    <span class="bar-label">Sep</span>
+                                </div>
+                                <div class="comparison-bar-group">
+                                    <div class="bar-pair">
+                                        <div class="bar reference" style="height: 80%;"></div>
+                                        <div class="bar projection" style="height: 76%;"></div>
+                                    </div>
+                                    <span class="bar-label">Oct</span>
+                                </div>
+                                <div class="comparison-bar-group">
+                                    <div class="bar-pair">
+                                        <div class="bar reference" style="height: 82%;"></div>
+                                        <div class="bar projection" style="height: 78%;"></div>
+                                    </div>
+                                    <span class="bar-label">Nov</span>
+                                </div>
+                                <div class="comparison-bar-group">
+                                    <div class="bar-pair">
+                                        <div class="bar reference" style="height: 85%;"></div>
+                                        <div class="bar projection" style="height: 80%;"></div>
+                                    </div>
+                                    <span class="bar-label">Déc</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="uk-width-1-3@m">
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <div class="uk-card-header uk-padding-remove-top">
+                            <h3 class="uk-card-title">Évolution des ETP</h3>
+                        </div>
+                        
+                        <div class="etp-evolution">
+                            <div class="etp-item">
+                                <div class="etp-month">Janvier</div>
+                                <div class="etp-value">45.5</div>
+                                <div class="etp-change"></div>
+                            </div>
+                            <div class="etp-item">
+                                <div class="etp-month">Février</div>
+                                <div class="etp-value">45.5</div>
+                                <div class="etp-change"></div>
+                            </div>
+                            <div class="etp-item">
+                                <div class="etp-month">Mars</div>
+                                <div class="etp-value">45.5</div>
+                                <div class="etp-change"></div>
+                            </div>
+                            <div class="etp-item highlight-change">
+                                <div class="etp-month">Avril</div>
+                                <div class="etp-value">44.5</div>
+                                <div class="etp-change uk-text-warning">-1.0</div>
+                            </div>
+                            <div class="etp-item">
+                                <div class="etp-month">Mai</div>
+                                <div class="etp-value">44.5</div>
+                                <div class="etp-change"></div>
+                            </div>
+                            <div class="etp-item">
+                                <div class="etp-month">Juin</div>
+                                <div class="etp-value">44.5</div>
+                                <div class="etp-change"></div>
+                            </div>
+                            <div class="etp-item">
+                                <div class="etp-month">Juillet</div>
+                                <div class="etp-value">44.5</div>
+                                <div class="etp-change"></div>
+                            </div>
+                            <div class="etp-item highlight-add">
+                                <div class="etp-month">Août</div>
+                                <div class="etp-value">45.5</div>
+                                <div class="etp-change uk-text-success">+1.0</div>
+                            </div>
+                            <div class="etp-item">
+                                <div class="etp-month">Septembre</div>
+                                <div class="etp-value">45.5</div>
+                                <div class="etp-change"></div>
+                            </div>
+                            <div class="etp-item">
+                                <div class="etp-month">Octobre</div>
+                                <div class="etp-value">45.5</div>
+                                <div class="etp-change"></div>
+                            </div>
+                            <div class="etp-item">
+                                <div class="etp-month">Novembre</div>
+                                <div class="etp-value">45.5</div>
+                                <div class="etp-change"></div>
+                            </div>
+                            <div class="etp-item">
+                                <div class="etp-month">Décembre</div>
+                                <div class="etp-value">45.5</div>
+                                <div class="etp-change"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Detailed Variance Table -->
+            <div class="uk-card uk-card-default uk-card-body uk-margin-medium-top">
+                <div class="uk-card-header uk-padding-remove-top">
+                    <h3 class="uk-card-title">Détail des Variances par Action</h3>
+                </div>
+                
+                <div class="uk-overflow-auto">
+                    <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+                        <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Collaborateur</th>
+                                <th>Date d'effet</th>
+                                <th class="uk-text-right">Coût Référence</th>
+                                <th class="uk-text-right">Coût Projeté</th>
+                                <th class="uk-text-right">Variance</th>
+                                <th class="uk-text-right">% Variance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="uk-label uk-label-primary">Augmentation</span>
+                                </td>
+                                <td>
+                                    <div class="uk-flex uk-flex-middle">
+                                        <div class="uk-border-circle uk-background-primary uk-flex uk-flex-center uk-flex-middle" 
+                                             style="width: 30px; height: 30px;">
+                                            <span class="uk-text-small" style="color: white;">MD</span>
+                                        </div>
+                                        <span class="uk-margin-small-left">Marie Dupont</span>
+                                    </div>
+                                </td>
+                                <td>01/01/2024</td>
+                                <td class="uk-text-right">53 760 €</td>
+                                <td class="uk-text-right">55 680 €</td>
+                                <td class="uk-text-right uk-text-danger">+1 920 €</td>
+                                <td class="uk-text-right uk-text-danger">+3.6%</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="uk-label uk-label-warning">Départ</span>
+                                </td>
+                                <td>
+                                    <div class="uk-flex uk-flex-middle">
+                                        <div class="uk-border-circle uk-background-secondary uk-flex uk-flex-center uk-flex-middle" 
+                                             style="width: 30px; height: 30px;">
+                                            <span class="uk-text-small" style="color: white;">JM</span>
+                                        </div>
+                                        <span class="uk-margin-small-left">Jean Martin</span>
+                                    </div>
+                                </td>
+                                <td>31/03/2024</td>
+                                <td class="uk-text-right">75 600 €</td>
+                                <td class="uk-text-right">18 900 €</td>
+                                <td class="uk-text-right uk-text-success">-56 700 €</td>
+                                <td class="uk-text-right uk-text-success">-75.0%</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="uk-label uk-label-success">Recrutement</span>
+                                </td>
+                                <td>
+                                    <div class="uk-flex uk-flex-middle">
+                                        <div class="uk-border-circle uk-background-muted uk-flex uk-flex-center uk-flex-middle" 
+                                             style="width: 30px; height: 30px;">
+                                            <span class="uk-text-small">?</span>
+                                        </div>
+                                        <span class="uk-margin-small-left">Nouveau collaborateur</span>
+                                    </div>
+                                </td>
+                                <td>01/08/2024</td>
+                                <td class="uk-text-right">0 €</td>
+                                <td class="uk-text-right">23 100 €</td>
+                                <td class="uk-text-right uk-text-danger">+23 100 €</td>
+                                <td class="uk-text-right uk-text-muted">N/A</td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="uk-background-muted">
+                            <tr>
+                                <td colspan="3" class="uk-text-bold">TOTAL</td>
+                                <td class="uk-text-right uk-text-bold">2 450 000 €</td>
+                                <td class="uk-text-right uk-text-bold">2 418 320 €</td>
+                                <td class="uk-text-right uk-text-bold uk-text-success">-31 680 €</td>
+                                <td class="uk-text-right uk-text-bold uk-text-success">-1.3%</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Monthly Breakdown Table -->
+            <div class="uk-card uk-card-default uk-card-body uk-margin-medium-top">
+                <div class="uk-card-header uk-padding-remove-top">
+                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                        <h3 class="uk-card-title uk-margin-remove">Projection Mensuelle Détaillée</h3>
+                        <div uk-form-custom="target: true">
+                            <select class="uk-select">
+                                <option value="2024">Année 2024</option>
+                                <option value="2025">Année 2025</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="uk-overflow-auto">
+                    <table class="uk-table uk-table-small uk-table-divider monthly-projection-table">
+                        <thead>
+                            <tr>
+                                <th>Indicateur</th>
+                                <th class="uk-text-right">Jan</th>
+                                <th class="uk-text-right">Fév</th>
+                                <th class="uk-text-right">Mar</th>
+                                <th class="uk-text-right">Avr</th>
+                                <th class="uk-text-right">Mai</th>
+                                <th class="uk-text-right">Juin</th>
+                                <th class="uk-text-right">Juil</th>
+                                <th class="uk-text-right">Août</th>
+                                <th class="uk-text-right">Sep</th>
+                                <th class="uk-text-right">Oct</th>
+                                <th class="uk-text-right">Nov</th>
+                                <th class="uk-text-right">Déc</th>
+                                <th class="uk-text-right uk-text-bold">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="uk-text-bold">Masse Salariale (K€)</td>
+                                <td class="uk-text-right">198</td>
+                                <td class="uk-text-right">198</td>
+                                <td class="uk-text-right">198</td>
+                                <td class="uk-text-right">192</td>
+                                <td class="uk-text-right">192</td>
+                                <td class="uk-text-right">192</td>
+                                <td class="uk-text-right">192</td>
+                                <td class="uk-text-right">207</td>
+                                <td class="uk-text-right">207</td>
+                                <td class="uk-text-right">207</td>
+                                <td class="uk-text-right">207</td>
+                                <td class="uk-text-right">228</td>
+                                <td class="uk-text-right uk-text-bold">2 418</td>
+                            </tr>
+                            <tr>
+                                <td class="uk-text-bold">ETP</td>
+                                <td class="uk-text-right">45.5</td>
+                                <td class="uk-text-right">45.5</td>
+                                <td class="uk-text-right">45.5</td>
+                                <td class="uk-text-right">44.5</td>
+                                <td class="uk-text-right">44.5</td>
+                                <td class="uk-text-right">44.5</td>
+                                <td class="uk-text-right">44.5</td>
+                                <td class="uk-text-right">45.5</td>
+                                <td class="uk-text-right">45.5</td>
+                                <td class="uk-text-right">45.5</td>
+                                <td class="uk-text-right">45.5</td>
+                                <td class="uk-text-right">45.5</td>
+                                <td class="uk-text-right uk-text-bold">45.0</td>
+                            </tr>
+                            <tr class="uk-text-success">
+                                <td class="uk-text-bold">Variance (K€)</td>
+                                <td class="uk-text-right">-3</td>
+                                <td class="uk-text-right">-3</td>
+                                <td class="uk-text-right">-3</td>
+                                <td class="uk-text-right">-8</td>
+                                <td class="uk-text-right">-5</td>
+                                <td class="uk-text-right">-5</td>
+                                <td class="uk-text-right">-5</td>
+                                <td class="uk-text-right">+2</td>
+                                <td class="uk-text-right">+2</td>
+                                <td class="uk-text-right">+2</td>
+                                <td class="uk-text-right">+2</td>
+                                <td class="uk-text-right">-8</td>
+                                <td class="uk-text-right uk-text-bold">-32</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Action Summary -->
+            <div class="uk-grid-small uk-margin-medium-top" uk-grid>
+                <div class="uk-width-1-2@m">
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title">Résumé des Décisions</h3>
+                        
+                        <ul class="uk-list uk-list-large uk-list-divider">
+                            <li class="uk-flex uk-flex-between uk-flex-middle">
+                                <div>
+                                    <span uk-icon="icon: arrow-up; ratio: 0.8" class="uk-text-danger uk-margin-small-right"></span>
+                                    <strong>Augmentations</strong>
+                                    <p class="uk-text-small uk-text-muted uk-margin-remove">1 collaborateur concerné</p>
+                                </div>
+                                <span class="uk-text-danger uk-text-bold">+1 920 €</span>
+                            </li>
+                            <li class="uk-flex uk-flex-between uk-flex-middle">
+                                <div>
+                                    <span uk-icon="icon: sign-out; ratio: 0.8" class="uk-text-warning uk-margin-small-right"></span>
+                                    <strong>Départs</strong>
+                                    <p class="uk-text-small uk-text-muted uk-margin-remove">1 collaborateur (retraite)</p>
+                                </div>
+                                <span class="uk-text-success uk-text-bold">-56 700 €</span>
+                            </li>
+                            <li class="uk-flex uk-flex-between uk-flex-middle">
+                                <div>
+                                    <span uk-icon="icon: user-plus; ratio: 0.8" class="uk-text-success uk-margin-small-right"></span>
+                                    <strong>Recrutements</strong>
+                                    <p class="uk-text-small uk-text-muted uk-margin-remove">1 nouveau CDI prévu</p>
+                                </div>
+                                <span class="uk-text-danger uk-text-bold">+23 100 €</span>
+                            </li>
+                        </ul>
+                        
+                        <hr>
+                        
+                        <div class="uk-flex uk-flex-between uk-flex-middle">
+                            <span class="uk-text-bold uk-text-large">Impact Net</span>
+                            <span class="uk-text-success uk-text-bold uk-text-large">-31 680 €</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="uk-width-1-2@m">
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title">Notes & Commentaires</h3>
+                        
+                        <ul class="uk-comment-list">
+                            <li>
+                                <article class="uk-comment uk-visible-toggle">
+                                    <header class="uk-comment-header uk-flex-middle">
+                                        <div class="uk-comment-avatar uk-border-circle uk-background-primary uk-flex uk-flex-center uk-flex-middle" 
+                                             style="width: 40px; height: 40px;">
+                                            <span class="uk-text-small" style="color: white;">AD</span>
+                                        </div>
+                                        <div class="uk-margin-small-left">
+                                            <h4 class="uk-comment-title uk-margin-remove">Admin</h4>
+                                            <p class="uk-comment-meta uk-margin-remove">Il y a 2 heures</p>
+                                        </div>
+                                    </header>
+                                    <div class="uk-comment-body">
+                                        <p class="uk-text-small">Le départ à la retraite de Jean Martin est prévu pour fin mars. Le recrutement de son remplaçant est planifié pour août afin d'optimiser les coûts du second semestre.</p>
+                                    </div>
+                                </article>
+                            </li>
+                        </ul>
+                        
+                        <form class="uk-margin-top">
+                            <textarea class="uk-textarea" rows="3" placeholder="Ajouter un commentaire..."></textarea>
+                            <button class="uk-button uk-button-primary uk-button-small uk-margin-small-top">
+                                Ajouter
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="uk-section uk-section-small uk-section-muted">
+        <div class="uk-container">
+            <div class="uk-flex uk-flex-between uk-flex-middle uk-flex-wrap">
+                <p class="uk-text-small uk-text-muted uk-margin-remove">
+                    © 2024 PILOTINE - Pilotage de la Masse Salariale
+                </p>
+                <p class="uk-text-small uk-text-muted uk-margin-remove">
+                    <span uk-icon="icon: lock; ratio: 0.7"></span>
+                    Connexion sécurisée MY SILAE (lecture seule)
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Custom JS -->
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

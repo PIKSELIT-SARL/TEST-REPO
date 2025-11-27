@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PILOTINE - Connexion</title>
+    
+    <!-- Franken UI CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/franken-ui@2.1.1/dist/css/core.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/franken-ui@2.1.1/dist/css/utilities.min.css" />
+    
+    <!-- UIkit JS for interactivity -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/js/uikit-icons.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="uk-background-muted">
+    <div class="uk-flex uk-flex-center uk-flex-middle uk-height-viewport">
+        <div class="uk-card uk-card-default uk-card-body uk-width-medium uk-box-shadow-large">
+            <!-- Logo -->
+            <div class="uk-text-center uk-margin-medium-bottom">
+                <div class="pilotine-logo">
+                    <span uk-icon="icon: settings; ratio: 2" class="uk-text-primary"></span>
+                </div>
+                <h1 class="uk-heading-small uk-margin-small-top uk-text-primary">PILOTINE</h1>
+                <p class="uk-text-muted uk-margin-remove">Pilotez votre masse salariale</p>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="loginForm" class="uk-form-stacked">
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="email">Email</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" id="email" type="email" placeholder="votre@email.com" required>
+                    </div>
+                </div>
+                
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="password">Mot de passe</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" id="password" type="password" placeholder="••••••••" required>
+                    </div>
+                </div>
+                
+                <div class="uk-margin uk-text-right">
+                    <a href="#" class="uk-link-muted uk-text-small">Mot de passe oublié ?</a>
+                </div>
+                
+                <button type="submit" class="uk-button uk-button-primary uk-width-1-1">
+                    Se connecter
+                </button>
+            </form>
+            
+            <!-- MFA Section (hidden initially) -->
+            <div id="mfaSection" class="uk-hidden">
+                <div class="uk-alert uk-alert-primary uk-margin-top" uk-alert>
+                    <span uk-icon="icon: lock"></span>
+                    <span class="uk-text-small">Authentification Multi-Facteurs requise</span>
+                </div>
+                
+                <form id="mfaForm" class="uk-form-stacked uk-margin-top">
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="mfaCode">Code de vérification</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input uk-text-center uk-form-large" id="mfaCode" type="text" 
+                                   placeholder="000000" maxlength="6" pattern="[0-9]{6}" required>
+                        </div>
+                        <p class="uk-text-small uk-text-muted uk-margin-small-top">
+                            Saisissez le code envoyé sur votre téléphone
+                        </p>
+                    </div>
+                    
+                    <button type="submit" class="uk-button uk-button-primary uk-width-1-1">
+                        Vérifier
+                    </button>
+                    
+                    <div class="uk-margin-top uk-text-center">
+                        <a href="#" class="uk-link-muted uk-text-small">Renvoyer le code</a>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Connection Info -->
+            <div class="uk-margin-medium-top uk-text-center">
+                <div class="uk-flex uk-flex-center uk-flex-middle uk-flex-wrap">
+                    <span uk-icon="icon: cloud-upload; ratio: 0.8" class="uk-text-success uk-margin-small-right"></span>
+                    <span class="uk-text-small uk-text-muted">Connexion sécurisée MY SILAE</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Custom JS -->
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
